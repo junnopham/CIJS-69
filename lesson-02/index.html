@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <style>
+        .container {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="number" id="counter" value="0" />
+        <button id="start">Start</button>
+        <button id="pause">Pause</button>
+        <button id="stop">Stop</button>
+    </div>
+    <script>
+        const number = document.getElementById('counter')
+        const start = document.getElementById('start')
+        const pause = document.getElementById('pause')
+        const stop = document.getElementById('stop')
+
+        let counter = 0,
+            isRunning = false
+
+        let timer = setInterval(() => {
+            if (isRunning)
+                counter++
+            number.value = counter
+        }, 200)
+
+        start.addEventListener('click', () => {
+            isRunning = true
+        })
+
+        pause.addEventListener('click', () => {
+            isRunning = false
+        })
+
+        stop.addEventListener('click', () => {
+            clearInterval(timer)
+            counter = 0
+            number.value = counter
+        })
+    </script>
+</body>
+
+</html>
