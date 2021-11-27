@@ -28,23 +28,24 @@
         let counter = 0,
             isRunning = false
 
-        let timer = setInterval(() => {
-            if (isRunning)
-                counter++
-            number.value = counter
-        }, 200)
+        let timer
 
         start.addEventListener('click', () => {
-            isRunning = true
+            clearInterval(timer)
+            timer = setInterval(() => {
+                counter++
+                number.value = counter
+            }, 200)
         })
 
         pause.addEventListener('click', () => {
-            isRunning = false
+            clearInterval(timer)
         })
 
         stop.addEventListener('click', () => {
             counter = 0
-            isRunning = false
+            number.value = counter
+            clearInterval(timer)
         })
     </script>
 </body>
