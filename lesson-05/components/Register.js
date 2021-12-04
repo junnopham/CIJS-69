@@ -7,6 +7,8 @@ import {
 
 
 import Input from './Input.js'
+import Login from './Login.js'
+import app from '../app.js'
 
 const auth = getAuth();
 
@@ -20,6 +22,7 @@ class Register {
 	$term;
 	$confirm;
 	$form;
+	$login;
 	constructor() {
 		this.$form = document.createElement('form')
 		this.$form.classList.add('mx-auto', 'w-5/6', 'lg:w-1/2', 'bg-white', 'shadow-md', 'rounded-lg', 'border-2', 'px-6', 'py-8')
@@ -41,7 +44,14 @@ class Register {
 
 		this.$term = document.createElement('div')
 		this.$term.classList.add('text-center', 'text-sm', 'text-gray-500', 'mt-2')
-		this.$term.textContent = 'By signing up, you agree to the Terms of Service'
+		this.$term.textContent = 'By signing up, you agree to the Terms of Service. If you have account, '
+
+		this.$login = document.createElement('a')
+		this.$login.setAttribute('class', 'text-blue-600 uppercase italic font-medium cursor-pointer')
+		this.$login.textContent = 'login here'
+		this.$login.addEventListener('click', () => {
+			app.setActiveScreen(new Login())
+		})
 	}
 
 	onSubmit = (e) => {
@@ -118,6 +128,8 @@ class Register {
 	}
 
 	render(container) {
+		this.$term.appendChild(this.$login)
+
 		this.$form.appendChild(this.$title)
 		this.$form.appendChild(this.$fullName.render())
 		this.$form.appendChild(this.$email.render())
