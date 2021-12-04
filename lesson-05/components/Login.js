@@ -4,6 +4,9 @@ import {
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js'
 
 import Input from './Input.js'
+import Register from './Register.js'
+import Main from './Main.js'
+import app from '../app.js'
 
 const auth = getAuth()
 
@@ -11,6 +14,7 @@ class Login {
 	$email;
 	$password;
 	$confirm;
+	$registerEl;
 	$form;
 	constructor() {
 		this.$form = document.createElement('form')
@@ -27,6 +31,19 @@ class Login {
 		this.$confirm = document.createElement('button')
 		this.$confirm.classList.add('w-full', 'text-center', 'py-3', 'rounded', 'bg-indigo-600', 'text-white', 'my-1')
 		this.$confirm.textContent = 'Login'
+
+		this.$registerEl = document.createElement('p')
+		this.$registerEl.classList.add('text-center', 'text-sm', 'text-gray-500', 'mt-2')
+		this.$registerEl.textContent = 'Don\'t have a account? '
+
+		const register = document.createElement('a')
+		register.textContent = 'Register here!'
+		register.setAttribute('class', 'text-blue-600 uppercase italic font-medium cursor-pointer')
+		register.addEventListener('click', () => {
+			app.setActiveScreen(new Register())
+		})
+
+		this.$registerEl.appendChild(register)
 	}
 
 	onSubmit = (e) => {
@@ -40,7 +57,7 @@ class Login {
 				// Signed in 
 				const user = userCredential.user;
 				console.log(user)
-				alert(`Welcome, ${user.displayName}`)
+				app.setActiveScreen(new Main())
 			})
 			.catch((error) => {
 				console.log('Code:', error.code)
@@ -48,13 +65,14 @@ class Login {
 			});
 	}
 
-	render() {
+	render(container) {
 		this.$form.appendChild(this.$title)
 		this.$form.appendChild(this.$email.render())
 		this.$form.appendChild(this.$password.render())
 		this.$form.appendChild(this.$confirm)
+		this.$form.appendChild(this.$registerEl)
 
-		return this.$form
+		container.appendChild(this.$form)
 	}
 }
 
