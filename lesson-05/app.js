@@ -21,21 +21,21 @@ class App {
   setupAuthenticationListener() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const mainScreen = new Main();
-        this.setActiveScreen(mainScreen);
-      } else {
-        const loginScreen = new Login();
-        this.setActiveScreen(loginScreen);
+         const mainScreen = new Main();
+         this.setActiveScreen(mainScreen);
+       } else {
+         const loginScreen = new Login();
+         this.setActiveScreen(loginScreen);
       }
     });
   }
 
   setActiveScreen(screen) {
     if (this.activeScreen !== undefined) {
-      this.container.innerHTML = '';
+      this.container.innerHTML = ''
     }
-    this.activeScreen = screen;
-    this.activeScreen.render(this.container);
+    this.activeScreen = screen
+    this.activeScreen.render(this.container)
   }
 }
 
