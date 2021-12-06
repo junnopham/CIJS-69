@@ -30,14 +30,6 @@ export default class ConversationItem {
       items.forEach(item => item.classList.remove('bg-indigo-200'))
       event.currentTarget.classList.add('bg-indigo-200')
     }
-
-    setActivate() {
-      this.$infoConversation.classList.add('bg-indigo-200')
-    }
-
-    setDeactivate() {
-      this.$infoConversation.classList.remove('bg-indigo-200')
-    }
   
     render(conversationsContainer) {
       const container = document.createElement('div')
